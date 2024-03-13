@@ -202,18 +202,15 @@ public class Login extends javax.swing.JFrame {
        String senha = textSenha.getText();
        
        
-       if (!nome.equals("admin") && !senha.equals("1234")) {
-           textSituacao.setForeground(Color.red);
-           textSituacao.setText("Nome ou senha está incorreto");
-        }else{
+        if (!nome.equals("admin") && !senha.equals("1234")) {
+            textSituacao.setForeground(Color.red);
+            textSituacao.setText("Nome ou senha está incorreto");
+        }else{       
+            Formulario form = new Formulario();
+            form.setVisible(true);
+            this.setVisible(false);
+        }  
        
-        textSituacao.setForeground(Color.GREEN);
-        textSituacao.setText("Login feito com sucesso!"); 
-       
-        Formulario form = new Formulario();
-        form.setVisible(true);
-        this.setVisible(false);
-       }  
     }//GEN-LAST:event_btnEntrarMouseClicked
 
     /**
