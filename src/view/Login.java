@@ -204,7 +204,7 @@ public class Login extends javax.swing.JFrame {
        
         if (!nome.equals("admin") && !senha.equals("1234")) {
             textSituacao.setForeground(Color.red);
-            textSituacao.setText("Nome ou senha está incorreto");
+            textSituacao.setText("Nome ou senha estï¿½ incorreto");
         }else{       
             Formulario form = new Formulario();
             form.setVisible(true);
