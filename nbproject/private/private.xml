@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/phfen/OneDrive/Geral/Docs/Estudos%20-%20Aulas%20e%20Bibliografias/Projetos/2s-ADS%20-%2001%202024/Projeto%20Integrador/ADO¨6/Gerenciamento-de-Estoque-Odontol-gico/src/model/Dentistas.java</file>
             <file>file:/C:/Users/phfen/OneDrive/Geral/Docs/Estudos%20-%20Aulas%20e%20Bibliografias/Projetos/2s-ADS%20-%2001%202024/Projeto%20Integrador/ADO¨6/Gerenciamento-de-Estoque-Odontol-gico/src/model/Manutencao.java</file>
             <file>file:/C:/Users/phfen/OneDrive/Geral/Docs/Estudos%20-%20Aulas%20e%20Bibliografias/Projetos/2s-ADS%20-%2001%202024/Projeto%20Integrador/ADO¨6/Gerenciamento-de-Estoque-Odontol-gico/src/model/Servicos.java</file>
@@ -10,6 +11,10 @@
             <file>file:/C:/Users/phfen/OneDrive/Geral/Docs/Estudos%20-%20Aulas%20e%20Bibliografias/Projetos/2s-ADS%20-%2001%202024/Projeto%20Integrador/ADO¨6/Gerenciamento-de-Estoque-Odontol-gico/src/model/Estoque.java</file>
             <file>file:/C:/Users/phfen/OneDrive/Geral/Docs/Estudos%20-%20Aulas%20e%20Bibliografias/Projetos/2s-ADS%20-%2001%202024/Projeto%20Integrador/ADO¨6/Gerenciamento-de-Estoque-Odontol-gico/src/view/Formulario.java</file>
             <file>file:/C:/Users/phfen/OneDrive/Geral/Docs/Estudos%20-%20Aulas%20e%20Bibliografias/Projetos/2s-ADS%20-%2001%202024/Projeto%20Integrador/ADO¨6/Gerenciamento-de-Estoque-Odontol-gico/src/model/ServicosPrestados.java</file>
+=======
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/Gerenciamento%20de%20Estoque%20Odontologico/src/view/Formulario.java</file>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/Gerenciamento%20de%20Estoque%20Odontologico/src/view/Login.java</file>
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
         </group>
     </open-files>
 </project-private>
