@@ -6,7 +6,15 @@ package view;
 
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
+<<<<<<< HEAD
 import model.Dentistas;
+=======
+<<<<<<< HEAD
+import model.Dentistas;
+=======
+
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
 
 /**
  *
@@ -36,7 +44,15 @@ public class Formulario extends javax.swing.JFrame {
         tableOdont = new javax.swing.JTable();
         textNome = new javax.swing.JTextField();
         textEmail = new javax.swing.JTextField();
+<<<<<<< HEAD
         textCRO = new javax.swing.JTextField();
+=======
+<<<<<<< HEAD
+        textCRO = new javax.swing.JTextField();
+=======
+        textCRM = new javax.swing.JTextField();
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
         textEspec = new javax.swing.JTextField();
         btnInserir = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
@@ -131,7 +147,15 @@ public class Formulario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(textEspec, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                         .addComponent(textCRO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+<<<<<<< HEAD
+                        .addComponent(textCRO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                        .addComponent(textCRM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
                     .addComponent(btnLimpar)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
@@ -159,7 +183,15 @@ public class Formulario extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                     .addComponent(textCRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+<<<<<<< HEAD
+                    .addComponent(textCRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                    .addComponent(textCRM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInserir)
@@ -194,6 +226,10 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
 
     }//GEN-LAST:event_btnInserirActionPerformed
     // TODO add your handling code here:
@@ -230,13 +266,55 @@ public class Formulario extends javax.swing.JFrame {
             }
         }
 
+<<<<<<< HEAD
+=======
+=======
+        
+    }//GEN-LAST:event_btnInserirActionPerformed
+        // TODO add your handling code here:
+    private void btnInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInserirMouseClicked
+        
+        DefaultTableModel tableO = (DefaultTableModel) tableOdont.getModel();
+            String nome = textNome.getText();
+            String email = textEmail.getText();
+            String especialidade = textEspec.getText();
+            String crm = textCRM.getText();
+           
+            if (!nome.isEmpty() && !email.isEmpty() && !especialidade.isEmpty() && !crm.isEmpty()) {
+                labelInfo.setForeground(Color.GREEN);
+                labelInfo.setText("Dados Inseridos");
+                    Object[] linha = {nome, email, especialidade, crm};
+                    tableO.addRow(linha);
+            } else {
+                labelInfo.setForeground(Color.red);
+                labelInfo.setText("Dados Incompleto");
+                    if(nome.isEmpty())
+                        textNome.requestFocus();
+                    else if(email.isEmpty())
+                        textEmail.requestFocus();
+                    else if(email.isEmpty())
+                        textEspec.requestFocus();
+                    else if(email.isEmpty())
+                        textCRM.requestFocus();
+            }
+        
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
     }//GEN-LAST:event_btnInserirMouseClicked
 
     private void btnLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparMouseClicked
         textNome.setText("");
         textEmail.setText("");
         textEspec.setText("");
+<<<<<<< HEAD
         textCRO.setText("");
+=======
+<<<<<<< HEAD
+        textCRO.setText("");
+=======
+        textCRM.setText("");
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
         textNome.requestFocus();
     }//GEN-LAST:event_btnLimparMouseClicked
 
@@ -287,7 +365,15 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelInfo;
     private javax.swing.JTable tableOdont;
+<<<<<<< HEAD
     private javax.swing.JTextField textCRO;
+=======
+<<<<<<< HEAD
+    private javax.swing.JTextField textCRO;
+=======
+    private javax.swing.JTextField textCRM;
+>>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
+>>>>>>> dc523f6229dec892e550f7a102ad8a816c3f2656
     private javax.swing.JTextField textEmail;
     private javax.swing.JTextField textEspec;
     private javax.swing.JTextField textNome;
