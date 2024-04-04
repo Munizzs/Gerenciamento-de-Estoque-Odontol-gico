@@ -1,6 +1,7 @@
 
 package model;
 
+
 public class Dentistas {
     private int idDentista;
     private String nome;
@@ -47,5 +48,7 @@ public class Dentistas {
     public void setCro(String cro) {
         this.cro = cro;
     }
-
+    
+    
+    
 }

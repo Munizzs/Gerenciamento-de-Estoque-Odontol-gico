@@ -67,11 +67,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="textEspec" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-<<<<<<< HEAD
                           <Component id="textCRO" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-=======
-                          <Component id="textCRM" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
->>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
                       </Group>
                       <Component id="btnLimpar" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -107,11 +103,7 @@
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="textEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
                       <Component id="textCRO" alignment="3" min="-2" max="-2" attributes="0"/>
-=======
-                      <Component id="textCRM" alignment="3" min="-2" max="-2" attributes="0"/>
->>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
                   </Group>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -199,11 +191,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textEmail">
         </Component>
-<<<<<<< HEAD
         <Component class="javax.swing.JTextField" name="textCRO">
-=======
-        <Component class="javax.swing.JTextField" name="textCRM">
->>>>>>> a03bd2caae7b03c6cb4f3bee015116d64bf62b55
         </Component>
         <Component class="javax.swing.JTextField" name="textEspec">
         </Component>
