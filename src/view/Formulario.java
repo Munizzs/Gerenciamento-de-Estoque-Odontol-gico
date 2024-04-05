@@ -7,6 +7,8 @@ package view;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import model.Dentistas;
+import controller.ConectarDao;
+import controller.DentistaDao;
 
 /**
  *
@@ -47,6 +49,11 @@ public class Formulario extends javax.swing.JFrame {
         labelInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -64,13 +71,16 @@ public class Formulario extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
 
         btnInserir.setText("Inserir");
@@ -116,7 +126,10 @@ public class Formulario extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(199, 199, 199)
+                .addComponent(labelInfo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -127,7 +140,7 @@ public class Formulario extends javax.swing.JFrame {
                             .addComponent(textEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(textNome))
                         .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(textEspec, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,10 +149,7 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
                 .addGap(41, 41, 41))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(labelInfo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,8 +176,9 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(btnLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelInfo)
-                .addGap(11, 11, 11)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,8 +192,8 @@ public class Formulario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 41, Short.MAX_VALUE))
         );
 
         pack();
@@ -198,37 +209,18 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInserirActionPerformed
     // TODO add your handling code here:
     private void btnInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInserirMouseClicked
-        Dentistas den = new Dentistas();
-
-        DefaultTableModel tableO = (DefaultTableModel) tableOdont.getModel();
-        den.setNome(textNome.getText());
-        den.setEmail(textEmail.getText());
-        den.setEspecialidade(textEspec.getText());
-        den.setCro(textCRO.getText());
-
-        if (!den.getNome().isEmpty() && !den.getEmail().isEmpty() && !den.getEspecialidade().isEmpty() && !den.getCro().isEmpty()) {
-            labelInfo.setForeground(Color.GREEN);
-            labelInfo.setText("Dados Inseridos");
-            Object[] linha = {den.getNome(), den.getEmail(), den.getEspecialidade(), den.getCro()};
-            tableO.addRow(linha);
-            textNome.setText("");
-            textEmail.setText("");
-            textEspec.setText("");
-            textCRO.setText("");
-            textNome.requestFocus();
-        } else {
-            labelInfo.setForeground(Color.red);
-            labelInfo.setText("Dados Incompleto");
-            if (den.getNome().isEmpty()) {
-                textNome.requestFocus();
-            } else if (den.getEspecialidade().isEmpty()) {
-                textEspec.requestFocus();
-            } else if (den.getEmail().isEmpty()) {
-                textEmail.requestFocus();
-            } else if (den.getCro().isEmpty()) {
-                textCRO.requestFocus();
-            }
-        }
+        DefaultTableModel MdlTableCli = (DefaultTableModel) this.tableOdont.getModel();
+        Object[] linhas = {this.textCRO.getText(), this.textNome.getText(),
+            this.textEmail.getText(), this.textEspec.getText()};
+        MdlTableCli.addRow(linhas);
+        Dentistas Lu = new Dentistas();
+        Lu.setCro(this.textCRO.getText());
+        Lu.setNome(this.textNome.getText());
+        Lu.setEmail(this.textEmail.getText());
+        Lu.setEspecialidade(this.textEspec.getText());
+        Lu.setIdNivel(this.cmbnivel.getSelectedIndex());
+        DentistaDao u1 = new DentistaDao();
+        u1.incluir(Lu);
 
     }//GEN-LAST:event_btnInserirMouseClicked
 
@@ -239,6 +231,11 @@ public class Formulario extends javax.swing.JFrame {
         textCRO.setText("");
         textNome.requestFocus();
     }//GEN-LAST:event_btnLimparMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        DentistaDao u = new DentistaDao();
+        u.criarBanco();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

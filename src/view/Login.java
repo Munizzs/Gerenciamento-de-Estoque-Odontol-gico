@@ -4,7 +4,15 @@
  */
 package view;
 
+import controller.DentistaDao;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
 
 /**
  *
@@ -74,6 +82,11 @@ public class Login extends javax.swing.JFrame {
         btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnEntrarMouseClicked(evt);
+            }
+        });
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
             }
         });
 
@@ -198,20 +211,31 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_textSenhaActionPerformed
 
     private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
-       String nome = textNome.getText();
-       String senha = textSenha.getText();
-       
-       
-        if (!nome.equals("admin") && !senha.equals("1234")) {
-            textSituacao.setForeground(Color.red);
-            textSituacao.setText("Nome ou senha está incorreto");
-        }else{       
-            Formulario form = new Formulario();
-            form.setVisible(true);
-            this.setVisible(false);
-        }  
-       
+        String login = textNome.getText();
+        String senha = textSenha.getText();
+        DentistaDao u = new DentistaDao();
+        try {
+            ResultSet resul = u.validarLogin(login, senha);
+            if (resul.next() || (login.equals("admin")
+                    && senha.equals("1234"))) {
+                Formulario objCli = new Formulario();
+                objCli.setVisible(true);
+                objCli.setTitle("usuário logado - " + login);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Ususário ou Senha Inválidos!", "Erro de Operação",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+
     }//GEN-LAST:event_btnEntrarMouseClicked
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
