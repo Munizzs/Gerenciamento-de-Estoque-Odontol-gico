@@ -21,10 +21,10 @@ public class DentistaDao extends ConectarDao {
     }
 
     public ResultSet validarLogin(String login, String senha) {
-        sql = "Select * from usuarios where email='" + login + "'"
+        sql = "Select * from dentista where email='" + login + "'"
                 + " and senha = '" + senha + "'";
         try {
-            PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
+            ps = (PreparedStatement) con.prepareStatement(sql);
             ResultSet resul = ps.executeQuery();
             return resul;
         } catch (SQLException err) {
@@ -34,15 +34,15 @@ public class DentistaDao extends ConectarDao {
     }
 
     public void incluir(Dentistas obj) {
-        sql = "INSERT INTO USUARIOS VALUES (?, ?, ?, ?, ?, ?)";
+        sql = "INSERT INTO DENTISTA VALUES (null,?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, obj.getCro());
-            ps.setString(2, obj.getNome());
-            ps.setString(3, obj.getEmail());
-            ps.setString(4, obj.getEspecialidade());
-            ps.setInt(5, obj.getIdNivel());
-            ps.setString(6, obj.getSenha());
+            
+            ps.setString(1, obj.getNome());
+            ps.setString(2, obj.getEmail());
+            ps.setString(3, obj.getEspecialidade());
+            ps.setString(4, obj.getCro());
+            ps.setString(5, obj.getSenha());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null,"Registro Incluído com Sucesso!");

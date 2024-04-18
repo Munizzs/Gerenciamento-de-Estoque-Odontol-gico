@@ -8,6 +8,15 @@ public class Dentistas {
     private String email;
     private String especialidade;
     private String cro;
+    private String senha;
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public int getIdDentista() {
         return idDentista;

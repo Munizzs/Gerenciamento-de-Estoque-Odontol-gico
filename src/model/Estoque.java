@@ -3,16 +3,16 @@ package model;
 
 
 public class Estoque {
-    private int idMaterial;
+    private String idMaterial;
     private String nomeEquip;
-    private int qtdMaterial;
-    private double validade;
+    private String qtdMaterial;
+    private String validade;
 
-    public int getIdMaterial() {
+    public String getIdMaterial() {
         return idMaterial;
     }
 
-    public void setIdMaterial(int idMaterial) {
+    public void setIdMaterial(String idMaterial) {
         this.idMaterial = idMaterial;
     }
 
@@ -24,20 +24,21 @@ public class Estoque {
         this.nomeEquip = nomeEquip;
     }
 
-    public int getQtdMaterial() {
+    public String getQtdMaterial() {
         return qtdMaterial;
     }
 
-    public void setQtdMaterial(int qtdMaterial) {
+    public void setQtdMaterial(String qtdMaterial) {
         this.qtdMaterial = qtdMaterial;
     }
 
-    public double getValidade() {
+    public String getValidade() {
         return validade;
     }
 
-    public void setValidade(double validade) {
+    public void setValidade(String validade) {
         this.validade = validade;
     }
-        
+
+    
 }

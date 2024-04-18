@@ -14,6 +14,7 @@ public class ConectarDao {
 
     public Connection con = null;
     public String sql = null;
+    public PreparedStatement ps;
 
     public ConectarDao() {
 
@@ -27,16 +28,17 @@ public class ConectarDao {
     }
 
     public void criarBanco() {
+        
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.execute();
+           
             sql = "CREATE TABLE IF NOT EXISTS DENTISTA ("
-                    + "pk_idDentista INT UNSIGNED NOT NULL AUTO_INCREMENT"
+                    + "pk_idDentista INT UNSIGNED NOT NULL AUTO_INCREMENT ,"
                     + "nome VARCHAR(50) NOT NULL ,"
                     + "email varchar(50) not null ,"
                     + "especialidade VARCHAR(20)NOT NULL,"
-                    + "cro INT(8)not null,"
-                    + "UNIQUE KEY (cro)"
+                    + "cro INT(10) not null,"
+                    + "senha varchar(50)  ,"
+                    + "UNIQUE KEY (cro) ,"
                     + "primary key (pk_idDentista) )";
             try {
                 ps = con.prepareStatement(sql);
@@ -85,7 +87,7 @@ public class ConectarDao {
                     + "PRIMARY KEY (pk_idServicoPrestado),"
                     + "FOREIGN KEY (fk_cro) REFERENCES dentista (cro),"
                     + "FOREIGN KEY (fk_idMaterial) REFERENCES estoqueMaterial(pk_idMaterial),"
-                    + " FOREIGN KEY (codigoServico) REFERENCES servico(pk_codigoServico) )";
+                    + " FOREIGN KEY (fk_codigoServico) REFERENCES servico(pk_codigoServico) )";
             try {
                 ps = con.prepareStatement(sql);
                 ps.execute();
