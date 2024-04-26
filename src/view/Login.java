@@ -225,11 +225,19 @@ public class Login extends javax.swing.JFrame {
         DentistaDao u = new DentistaDao();
         try {
             ResultSet resul = u.validarLogin(login, senha);
-            if ((login.equals("admin") && senha.equals("1234") || resul.next())) {
-                Formulario objCli = new Formulario();
+            if ((login.equals("admin") && senha.equals("1234") )) {
+               
+                FormDentista objCli = new FormDentista();
                 objCli.setVisible(true);
                 objCli.setTitle("usuário logado - " + login);
                 this.setVisible(false);
+           
+            }else if(resul.next()){
+                TelaPrincipal tp = new TelaPrincipal();
+                tp.setVisible(true);
+                tp.setTitle("usuário logado - " + login);
+                this.setVisible(false);
+            
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Ususário ou Senha Inválidos!", "Erro de Operação",
