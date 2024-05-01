@@ -18,7 +18,7 @@ public class ConectarDao {
 
     public ConectarDao() {
 
-        try { // Código que abre e armazena a
+        try { 
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "Muniz", "Zinum1008@");
             ps = con.prepareStatement("CREATE DATABASE IF NOT EXISTS bdodonto");
             ps.execute();
@@ -113,8 +113,7 @@ public class ConectarDao {
             }
 
             ps.close(); // Fecha o objeto
-            con.close(); // Fecha a conexão
-            JOptionPane.showMessageDialog(null, "Banco criado com sucesso...");
+            con.close(); // Fecha a conexão           
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro ao criar banco de dados " + err.getMessage());
         }
