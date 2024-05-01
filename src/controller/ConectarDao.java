@@ -19,18 +19,20 @@ public class ConectarDao {
     public ConectarDao() {
 
         try { // Código que abre e armazena a
-            con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/bdodonto", "root",
-                    "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "Muniz", "Zinum1008@");
+            ps = con.prepareStatement("CREATE DATABASE IF NOT EXISTS bdodonto");
+            ps.execute();
+            ps.close();
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdodonto", "Muniz", "Zinum1008@");
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro de Conexão com o MySQL ...\n" + err.getMessage());
         }
     }
 
     public void criarBanco() {
-        
+
         try {
-           
+
             sql = "CREATE TABLE IF NOT EXISTS DENTISTA ("
                     + "pk_idDentista INT UNSIGNED NOT NULL AUTO_INCREMENT ,"
                     + "nome VARCHAR(50) NOT NULL ,"
