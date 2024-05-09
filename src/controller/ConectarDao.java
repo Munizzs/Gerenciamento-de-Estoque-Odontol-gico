@@ -19,11 +19,11 @@ public class ConectarDao {
     public ConectarDao() {
 
         try { 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "Muniz", "Zinum1008@");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
             ps = con.prepareStatement("CREATE DATABASE IF NOT EXISTS bdodonto");
             ps.execute();
             ps.close();
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdodonto", "Muniz", "Zinum1008@");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdodonto", "root", "");
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro de Conexão com o MySQL ...\n" + err.getMessage());
         }
@@ -47,55 +47,34 @@ public class ConectarDao {
                 ps.execute();
                 ps.close();
             } catch (SQLException err) {
-                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Usuarios \n" + err.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Dentista \n" + err.getMessage());
             }
             sql = "CREATE TABLE IF NOT EXISTS EstoqueMaterial ("
-                    + " pk_idMaterial INT UNSIGNED NOT NULL AUTO_INCREMENT,"
-                    + " nomeEquipamento VARCHAR(30) NOT NULL,"
+                    + "pk_idMaterial INT UNSIGNED NOT NULL AUTO_INCREMENT,"
+                    + "idEquip INT UNSIGNED ,"
+                    + "nomeEquipamento VARCHAR(30) NOT NULL,"
                     + "qntdMateiral INT NOT NULL,"
-                    + " validade DATE,"
-                    + "PRIMARY KEY (pk_idMaterial) );";
+                    + "PRIMARY KEY (pk_idMaterial), "
+                    + "FOREIGN KEY (idEquip) REFERENCES Suprimentos(pk_idEquip) );";
             try {
                 ps = con.prepareStatement(sql);
                 ps.execute();
                 ps.close();
             } catch (SQLException err) {
-                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Usuarios \n" + err.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao criar tabela EstoqueMaterial \n" + err.getMessage());
             }
-            sql = "CREATE TABLE IF NOT EXISTS Servico ("
-                    + "pk_codigoServico INT UNSIGNED NOT NULL AUTO_INCREMENT,"
-                    + "tipoServico VARCHAR(15)NOT NULL,"
-                    + "preco FLOAT(25) NOT NULL,"
-                    + "qntEquipamento FLOAT NOT NULL,"
-                    + "fk_idMaterial INT UNSIGNED NOT NULL,"
-                    + "fk_cro INT NOT NULL,"
-                    + "PRIMARY KEY (pk_codigoServico),"
-                    + "FOREIGN KEY (fk_idMaterial) REFERENCES estoqueMaterial(pk_idMaterial),"
-                    + "FOREIGN KEY (fk_cro) REFERENCES dentista(cro) )";
+            sql = "CREATE TABLE IF NOT EXISTS Suprimentos ("
+                    + "pk_idEquip INT UNSIGNED NOT NULL AUTO_INCREMENT,"
+                    + "nomeEquip VARCHAR(15)NOT NULL,"
+                    + "reutilizavel boolean NOT NULL ,"
+                    + "PRIMARY KEY (pk_idEquip)) ";
+                    
             try {
                 ps = con.prepareStatement(sql);
                 ps.execute();
                 ps.close();
             } catch (SQLException err) {
-                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Usuarios \n" + err.getMessage());
-            }
-            sql = "CREATE TABLE IF NOT EXISTS servicoPrestado ("
-                    + " pk_idServicoPrestado INT UNSIGNED NOT NULL AUTO_INCREMENT,"
-                    + "convenio VARCHAR(20) NOT NULL,"
-                    + "status VARCHAR(10) NOT NULL,"
-                    + "fk_cro INT NOT NULL,"
-                    + "fk_idMaterial INT UNSIGNED NOT NULL,"
-                    + "fk_codigoServico INT UNSIGNED NOT NULL,"
-                    + "PRIMARY KEY (pk_idServicoPrestado),"
-                    + "FOREIGN KEY (fk_cro) REFERENCES dentista (cro),"
-                    + "FOREIGN KEY (fk_idMaterial) REFERENCES estoqueMaterial(pk_idMaterial),"
-                    + " FOREIGN KEY (fk_codigoServico) REFERENCES servico(pk_codigoServico) )";
-            try {
-                ps = con.prepareStatement(sql);
-                ps.execute();
-                ps.close();
-            } catch (SQLException err) {
-                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Usuarios \n" + err.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Suprimentos \n" + err.getMessage());
             }
 
             sql = "CREATE TABLE IF NOT EXISTS manuntencao ("
@@ -103,13 +82,13 @@ public class ConectarDao {
                     + "dtManutencao DATE NOT NULL,"
                     + "fk_idMaterial INT UNSIGNED  NOT NULL,"
                     + "PRIMARY KEY (pk_idManutencao),"
-                    + "FOREIGN KEY (fk_idMaterial) REFERENCES estoqueMaterial(pk_idMaterial) )";
+                    + "FOREIGN KEY (fk_idMaterial) REFERENCES suprimentos(pk_idEquip) )";
             try {
                 ps = con.prepareStatement(sql);
                 ps.execute();
                 ps.close();
             } catch (SQLException err) {
-                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Usuarios \n" + err.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao criar tabela Manutenção \n" + err.getMessage());
             }
 
             ps.close(); // Fecha o objeto

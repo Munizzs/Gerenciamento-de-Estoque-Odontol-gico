@@ -6,7 +6,17 @@ public class Manutencao {
     private int idManutencao;
     private int dtManutencao;
     private int idMaterial;
+    private String manuDescri;
+    
 
+    public String getManuDescri() {
+        return manuDescri;
+    }
+
+    public void setManuDescri(String manuDescri) {
+        this.manuDescri = manuDescri;
+    }
+    
     public int getIdManutencao() {
         return idManutencao;
     }
