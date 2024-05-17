@@ -13,8 +13,7 @@ import model.Dentistas;
 
 public class DentistaDao extends ConectarDao {
 
-    String sql;
-    PreparedStatement ps; // objeto para executar o sql
+   
 
     public DentistaDao() {
         super();

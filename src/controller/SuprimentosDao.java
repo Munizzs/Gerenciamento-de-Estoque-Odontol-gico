@@ -21,8 +21,7 @@ import model.Suprimentos;
  * @author rober
  */
 public class SuprimentosDao extends ConectarDao {
-    String sql;
-    PreparedStatement ps; // objeto para executar o sql
+    
 
     public SuprimentosDao() {
         super();
@@ -30,12 +29,16 @@ public class SuprimentosDao extends ConectarDao {
 
 
     public void incluir(Suprimentos obj) {
-        sql = "INSERT INTO Suprimentos VALUES (null ,? , ?)";
+        sql = "INSERT INTO Suprimentos VALUES (null ,? , ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, obj.getNomeEquip());
             ps.setBoolean(2, obj.isReutilizavel());
+            ps.setString(3, obj.getDtCompra());
+            ps.setString(4, obj.getCodLote());
+            ps.setString(5, obj.getDtValidade());
+            ps.setString(6, obj.getQuantidade());
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Registro Incluído com Sucesso!");
@@ -94,6 +97,11 @@ public class SuprimentosDao extends ConectarDao {
             ps = con.prepareStatement(sql);
             ps.setString(1, obj.getNomeEquip());
             ps.setBoolean(2, obj.isReutilizavel());
+            ps.setString(3, obj.getDtCompra());
+            ps.setString(4, obj.getCodLote());
+            ps.setString(5, obj.getDtValidade());
+            ps.setString(6, obj.getQuantidade());
+            ps.execute();
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Registro Alterado com Sucesso!");

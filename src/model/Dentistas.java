@@ -10,14 +10,6 @@ public class Dentistas {
     private String cro;
     private String senha;
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public int getIdDentista() {
         return idDentista;
     }
@@ -57,7 +49,13 @@ public class Dentistas {
     public void setCro(String cro) {
         this.cro = cro;
     }
-    
-    
-    
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
 }
