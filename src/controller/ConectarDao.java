@@ -18,10 +18,10 @@ public class ConectarDao {
 
     public ConectarDao() {
 
-        try { 
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
             this.criarBanco();
-            
+
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro de Conexão com o MySQL ...\n" + err.getMessage());
         }
@@ -30,10 +30,10 @@ public class ConectarDao {
     public void criarBanco() {
 
         try {
-            
+
             ps = con.prepareStatement("CREATE DATABASE IF NOT EXISTS bdodonto");
             ps.execute();
-            
+
             ps = con.prepareStatement("USE bdodonto");
             ps.execute();
 
@@ -46,10 +46,10 @@ public class ConectarDao {
                     + "senha varchar(50)  ,"
                     + "UNIQUE KEY (cro) ,"
                     + "primary key ( pk_idDentista) )";
-            
-                ps = con.prepareStatement(sql);
-                ps.execute();
-            
+
+            ps = con.prepareStatement(sql);
+            ps.execute();
+
             sql = "CREATE TABLE IF NOT EXISTS EstoqueMaterial ("
                     + "pk_idMaterial INT UNSIGNED NOT NULL AUTO_INCREMENT,"
                     + "pk_idEquip INT UNSIGNED NOT NULL,"
@@ -57,14 +57,13 @@ public class ConectarDao {
                     + "quantidade INT(100) NOT NULL,"
                     + "dtValidade varchar(10) NOT NULL,"
                     + "codLote varchar(100) NOT NULL,"
-                    + "quantRemove int (100) default '0',"  
+                    + "quantRemove int (100) default '0',"
                     + "reutilizavel boolean NOT NULL,"
                     + "PRIMARY KEY (pk_idMaterial) );";
-                       
-                ps = con.prepareStatement(sql);
-                ps.execute();
-            
-            
+
+            ps = con.prepareStatement(sql);
+            ps.execute();
+
             sql = "CREATE TABLE IF NOT EXISTS Suprimentos ("
                     + "pk_idEquip INT UNSIGNED NOT NULL AUTO_INCREMENT,"
                     + "nomeEquip VARCHAR(15)NOT NULL,"
@@ -72,26 +71,29 @@ public class ConectarDao {
                     + "dtCompra varchar(10) NOT NULL,"
                     + "codLote varchar(100) NOT NULL,"
                     + "dtValidade varchar(10) NOT NULL,"
-                    + "quantidade int(100) NOT NULL,"
+                    + "quantidade int(100) NOT NULL,"                  
                     + "PRIMARY KEY ( pk_idEquip ) ); ";
-                    
-            
-                ps = con.prepareStatement(sql);
-                ps.execute();
-            
-            
+
+            ps = con.prepareStatement(sql);
+            ps.execute();
+
             sql = "CREATE TABLE IF NOT EXISTS manuntencao ("
                     + "pk_idManutencao INT UNSIGNED NOT NULL AUTO_INCREMENT,"
-                    + "dtManutencao DATE NOT NULL,"
-                    + "fk_idMaterial INT UNSIGNED  NOT NULL,"
+                    + "dtManutencao varchar(10) NOT NULL,"
+                    + "descri varchar(50) NOT NULL,"
+                    + "fk_idMaterial INT UNSIGNED NOT NULL,"
+                    + "FOREIGN KEY(fk_idMaterial) REFERENCES Suprimentos (pk_idEquip),"
                     + "PRIMARY KEY (pk_idManutencao) )";
+
+            ps = con.prepareStatement(sql);
+            ps.execute();
             
-            
-
-                ps = con.prepareStatement(sql);
-                ps.execute();
-
-
+            sql = "SELECT EstoqueMaterial.pk_idMaterial, EstoqueMaterial.nomeEquip, EstoqueMaterial.quantidade, EstoqueMaterial.dtValidade, EstoqueMaterial.codLote, EstoqueMaterial.reutilizavel,\n"
+                    + "       Suprimentos.dtCompra, Suprimentos.codLote AS suprimentos_codLote, Suprimentos.quantidade AS suprimentos_quantidade\n"
+                    + "FROM EstoqueMaterial\n"
+                    + "JOIN Suprimentos ON EstoqueMaterial.pk_idEquip = Suprimentos.pk_idEquip;";
+            ps = con.prepareStatement(sql);
+            ps.execute();
 
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro ao criar banco de dados " + err.getMessage());

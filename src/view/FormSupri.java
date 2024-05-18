@@ -46,7 +46,7 @@ public class FormSupri extends javax.swing.JFrame {
             
             DefaultTableModel tab = (DefaultTableModel) this.tableSupri.getModel();
             while (todos.next()) {
-                Object[] linha = {todos.getString("nomeEquip"), todos.getBoolean("Reutilizavel"),todos.getString("dtCompra"),todos.getString("codLote"),todos.getString("dtValidade"),todos.getString("quantidade")};
+                Object[] linha = {todos.getString("pk_idEquip"), todos.getString("nomeEquip"), todos.getBoolean("Reutilizavel"),todos.getString("dtCompra"),todos.getString("codLote"),todos.getString("dtValidade"),todos.getString("quantidade")};
                 tab.addRow(linha);
             }
             todos.close();
@@ -93,14 +93,14 @@ public class FormSupri extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome do equipamento", "Reutilizavel", "Data de Compra", "cod Lote", "Data de Validade", "Quantidade"
+                "Primary", "Nome do equipamento", "Reutilizavel", "Data de Compra", "cod Lote", "Data de Validade", "Quantidade"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

@@ -33,11 +33,11 @@ public class FormEstoque extends javax.swing.JFrame {
             ((DefaultTableModel) tableEst.getModel()).removeRow(0);
         }
         try {
-            ResultSet todos = sd.buscartodos();
-            ResultSet todosEs = ed.buscartodos();
+            ResultSet todos = ed.buscartodos();
+            
             DefaultTableModel tab = (DefaultTableModel) this.tableEst.getModel();
             while (todos.next()) {
-                Object[] linha = { todos.getString("codLote"), todos.getString("nomeEquip"),todos.getString("quantidade"),todos.getString("dtValidade"), todos.getBoolean("Reutilizavel"),todosEs.getString("quantRemove")};
+                Object[] linha = { todos.getString("codLote"), todos.getString("nomeEquip"),todos.getString("quantidade"),todos.getString("dtValidade"), todos.getBoolean("Reutilizavel")};
                 tab.addRow(linha);
             }
             todos.close();
