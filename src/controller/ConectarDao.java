@@ -19,7 +19,8 @@ public class ConectarDao {
     public ConectarDao() {
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
+            //con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "Muniz", "Zinum1008@");
             this.criarBanco();
 
         } catch (SQLException err) {
@@ -88,12 +89,12 @@ public class ConectarDao {
             ps = con.prepareStatement(sql);
             ps.execute();
             
-            sql = "SELECT EstoqueMaterial.pk_idMaterial, EstoqueMaterial.nomeEquip, EstoqueMaterial.quantidade, EstoqueMaterial.dtValidade, EstoqueMaterial.codLote, EstoqueMaterial.reutilizavel,\n"
-                    + "       Suprimentos.dtCompra, Suprimentos.codLote AS suprimentos_codLote, Suprimentos.quantidade AS suprimentos_quantidade\n"
+            /*sql = "SELECT EstoqueMaterial.pk_idMaterial, EstoqueMaterial.nomeEquip, EstoqueMaterial.quantidade, EstoqueMaterial.dtValidade, EstoqueMaterial.codLote, EstoqueMaterial.reutilizavel,\n"
+                    + "Suprimentos.dtCompra, Suprimentos.codLote AS suprimentos_codLote, Suprimentos.quantidade AS suprimentos_quantidade\n"
                     + "FROM EstoqueMaterial\n"
                     + "JOIN Suprimentos ON EstoqueMaterial.pk_idEquip = Suprimentos.pk_idEquip;";
             ps = con.prepareStatement(sql);
-            ps.execute();
+            ps.execute();*/
 
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro ao criar banco de dados " + err.getMessage());

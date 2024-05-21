@@ -25,6 +25,9 @@ public class FormEstoque extends javax.swing.JFrame {
     }
 
     private void carregar_Estoque() {
+        String removeString = txtQtdRem.getText();
+        int remove = Integer.parseInt(removeString);
+        
         SuprimentosDao sd = new SuprimentosDao();
         EstoqueDao ed = new EstoqueDao();
         
@@ -37,7 +40,7 @@ public class FormEstoque extends javax.swing.JFrame {
             
             DefaultTableModel tab = (DefaultTableModel) this.tableEst.getModel();
             while (todos.next()) {
-                Object[] linha = { todos.getString("codLote"), todos.getString("nomeEquip"),todos.getString("quantidade"),todos.getString("dtValidade"), todos.getBoolean("Reutilizavel")};
+                Object[] linha = { todos.getString("codLote"), todos.getString("nomeEquip"),todos.getString("quantidade"),todos.getString("dtValidade"), todos.getBoolean("Reutilizavel"),remove};
                 tab.addRow(linha);
             }
             todos.close();
@@ -54,7 +57,7 @@ public class FormEstoque extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableEst = new javax.swing.JTable();
         txtNome = new javax.swing.JTextField();
-        txtQuant = new javax.swing.JTextField();
+        txtQtdRem = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -103,9 +106,9 @@ public class FormEstoque extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableEst);
 
-        txtQuant.addActionListener(new java.awt.event.ActionListener() {
+        txtQtdRem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantActionPerformed(evt);
+                txtQtdRemActionPerformed(evt);
             }
         });
 
@@ -148,7 +151,7 @@ public class FormEstoque extends javax.swing.JFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(txtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQtdRem, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(182, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -178,7 +181,7 @@ public class FormEstoque extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtQtdRem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -199,9 +202,9 @@ public class FormEstoque extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtQuantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantActionPerformed
+    private void txtQtdRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdRemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantActionPerformed
+    }//GEN-LAST:event_txtQtdRemActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         
@@ -274,6 +277,6 @@ TelaPrincipal tp = new TelaPrincipal();
     private javax.swing.JTable tableEst;
     private javax.swing.JTextField txtLote;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtQuant;
+    private javax.swing.JTextField txtQtdRem;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,7 +25,7 @@ public class EstoqueDao extends ConectarDao {
     }
 
     public ResultSet buscartodos() {
-        sql = "SELECT * FROM EstoqueMaterial ORDER BY nomeEquip ";
+        sql = "SELECT * FROM EstoqueMaterial";
         try {
             ps = con.prepareStatement(sql);
             return ps.executeQuery();
