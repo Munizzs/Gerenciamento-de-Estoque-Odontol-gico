@@ -322,7 +322,7 @@ public class FormSupri extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirMouseClicked
 
     private void tableSupriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSupriMouseClicked
-          /* busca a linha selecionada no jTable1 */
+        /* busca a linha selecionada no jTable1 */
         int linhasel = this.tableSupri.getSelectedRow();
         int colunachave = 0; // configura coluna como 0,isto é, a primeira coluna
         Object chave = this.tableSupri.getModel().getValueAt(linhasel, colunachave);
@@ -336,12 +336,11 @@ public class FormSupri extends javax.swing.JFrame {
         ResultSet resul = sd.buscar(sm);
         try {
             if (resul.next()) {
-                
+
                 this.txtNome.setText(resul.getString("nome"));
-                
+
                 //this.checkReu.setText(resul.getBoolean("reutilizavel"));
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Registro não encontrado!");
                 this.txtNome.grabFocus();

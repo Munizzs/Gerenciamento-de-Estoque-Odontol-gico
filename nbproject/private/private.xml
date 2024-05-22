@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/GerenciamentoEstoqueOdontologicoo/src/view/Login.java</file>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/GerenciamentoEstoqueOdontologicoo/src/view/FormSupri.java</file>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/GerenciamentoEstoqueOdontologicoo/src/view/TelaPrincipal.java</file>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/GerenciamentoEstoqueOdontologicoo/src/controller/SuprimentosDao.java</file>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/GerenciamentoEstoqueOdontologicoo/src/view/FormEstoque.java</file>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/GerenciamentoEstoqueOdontologicoo/src/controller/EstoqueDao.java</file>
+            <file>file:/C:/Users/Ideapad/Documents/NetBeansProjects/GerenciamentoEstoqueOdontologicoo/src/controller/ConectarDao.java</file>
+        </group>
     </open-files>
 </project-private>
