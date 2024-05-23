@@ -1,37 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
-import java.sql.DriverManager; // Driver para abrir Conexão
-import java.sql.SQLException; // Tratamento de Erros SQL
-import java.sql.Connection; // Armazena a Conexão Aberta
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 
 public class ConectarDao {
 
     public Connection con = null;
-    public String sql = null;
-    public PreparedStatement ps;
+    private String sql = null;
+    private PreparedStatement ps;
 
     public ConectarDao() {
-
         try {
-            //con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
+             //con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "Muniz", "Zinum1008@");
             this.criarBanco();
-
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro de Conexão com o MySQL ...\n" + err.getMessage());
         }
     }
 
     public void criarBanco() {
-
         try {
-
             ps = con.prepareStatement("CREATE DATABASE IF NOT EXISTS bdodonto");
             ps.execute();
 
@@ -42,7 +34,7 @@ public class ConectarDao {
                     + "pk_idDentista INT UNSIGNED NOT NULL AUTO_INCREMENT ,"
                     + "nome VARCHAR(50) NOT NULL ,"
                     + "email varchar(50) not null ,"
-                    + "especialidade VARCHAR(20)NOT NULL,"
+                    + "especialidade VARCHAR(20) NOT NULL,"
                     + "cro INT(10) not null,"
                     + "senha varchar(50)  ,"
                     + "UNIQUE KEY (cro) ,"
@@ -72,7 +64,7 @@ public class ConectarDao {
                     + "dtCompra varchar(10) NOT NULL,"
                     + "codLote varchar(100) NOT NULL,"
                     + "dtValidade varchar(10) NOT NULL,"
-                    + "quantidade int(100) NOT NULL,"                  
+                    + "quantidade int(100) NOT NULL,"
                     + "PRIMARY KEY ( pk_idEquip ) ); ";
 
             ps = con.prepareStatement(sql);
@@ -89,16 +81,13 @@ public class ConectarDao {
             ps = con.prepareStatement(sql);
             ps.execute();
             
-            /*sql = "SELECT EstoqueMaterial.pk_idMaterial, EstoqueMaterial.nomeEquip, EstoqueMaterial.quantidade, EstoqueMaterial.dtValidade, EstoqueMaterial.codLote, EstoqueMaterial.reutilizavel,\n"
-                    + "Suprimentos.dtCompra, Suprimentos.codLote AS suprimentos_codLote, Suprimentos.quantidade AS suprimentos_quantidade\n"
-                    + "FROM EstoqueMaterial\n"
-                    + "JOIN Suprimentos ON EstoqueMaterial.pk_idEquip = Suprimentos.pk_idEquip;";
-            ps = con.prepareStatement(sql);
-            ps.execute();*/
-
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, "Erro ao criar banco de dados " + err.getMessage());
         }
     }
 
+    public static Connection getConectar() {
+        ConectarDao conectarDao = new ConectarDao();
+        return conectarDao.con;
+    }
 }

@@ -17,7 +17,7 @@ public class FormManu extends javax.swing.JFrame {
         initComponents();
     }
 
-    private void carregar_usuarios() {
+   /* private void carregar_usuarios() {
         ManutencaoDao dd = new ManutencaoDao();
 
         while (tablemanu.getModel().getRowCount() > 0) {
@@ -35,7 +35,7 @@ public class FormManu extends javax.swing.JFrame {
         } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, err.getMessage());
         }
-    }
+    }*/
     @SuppressWarnings("unchecked")
     
     
@@ -205,22 +205,22 @@ public class FormManu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-    this.carregar_usuarios();
+    //this.carregar_usuarios();
     }//GEN-LAST:event_formWindowOpened
 
     private void txtCadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCadMouseClicked
-            
+      /*      
         ManutencaoDao md = new ManutencaoDao();
-        /* Antes de mais nada, instancie o objeto Lu a partir da classe Usuario */
+        // Antes de mais nada, instancie o objeto Lu a partir da classe Usuario 
         Manutencao mm = new Manutencao();
-        /* Antes da persistência, enviaremos os dados para o objeto Lu primeiro */
+      //   Antes da persistência, enviaremos os dados para o objeto Lu primeiro 
         mm.setDtManutencao(this.txtDat.getText());
         mm.setManuDescri(this.txtDesc.getText());
         mm.setFkSupri(this.txtSupri.getText());
         
-        /* Para persistir, usaremos o objeto U1 da classe UsuarioDao */
+        // Para persistir, usaremos o objeto U1 da classe UsuarioDao 
 
- /* Para verificar se o usuário existe buscamos o cpf primeiro */
+ // Para verificar se o usuário existe buscamos o cpf primeiro 
         ResultSet resul = md.buscar(mm);
         try {
             if (resul.next()) {
@@ -234,8 +234,8 @@ public class FormManu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,
                     err.getMessage());
         }
-        /* Preenche o Jtable no form */
-        this.carregar_usuarios();
+        // Preenche o Jtable no form 
+        this.carregar_usuarios();*/
     }//GEN-LAST:event_txtCadMouseClicked
 
     /**

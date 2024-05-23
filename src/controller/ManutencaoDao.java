@@ -10,7 +10,7 @@ import model.Manutencao;
 
 
 public class ManutencaoDao extends ConectarDao {
-    
+  /*  
      public void incluir(Manutencao obj) {
         sql = "INSERT INTO manuntencao VALUES (null,?, ?,?)";
         try {
@@ -70,8 +70,8 @@ public class ManutencaoDao extends ConectarDao {
                     + err.getMessage());
         }
     }
-
-   /* public void alterar(Dentistas obj) {
+/////
+    public void alterar(Dentistas obj) {
         sql = "UPDATE DENTISTA SET nome = ?, email = ?, especialidade = ? "
                 + ", senha = ? WHERE cro = ?";
         try {

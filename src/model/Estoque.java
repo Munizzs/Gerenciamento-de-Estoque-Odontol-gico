@@ -1,19 +1,28 @@
-
 package model;
 
-
 public class Estoque {
-    private String idMaterial;
+    private int idMaterial;
+    private int idEquip;
     private String nomeEquip;
-    private String qtdMaterial;
-    private String validade;
+    private int quantidade;
+    private String dtValidade;
+    private String codLote;
+    private int quantRemove;
 
-    public String getIdMaterial() {
+    public int getIdMaterial() {
         return idMaterial;
     }
 
-    public void setIdMaterial(String idMaterial) {
+    public void setIdMaterial(int idMaterial) {
         this.idMaterial = idMaterial;
+    }
+
+    public int getIdEquip() {
+        return idEquip;
+    }
+
+    public void setIdEquip(int idEquip) {
+        this.idEquip = idEquip;
     }
 
     public String getNomeEquip() {
@@ -24,21 +33,35 @@ public class Estoque {
         this.nomeEquip = nomeEquip;
     }
 
-    public String getQtdMaterial() {
-        return qtdMaterial;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setQtdMaterial(String qtdMaterial) {
-        this.qtdMaterial = qtdMaterial;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public String getValidade() {
-        return validade;
+    public String getDtValidade() {
+        return dtValidade;
     }
 
-    public void setValidade(String validade) {
-        this.validade = validade;
+    public void setDtValidade(String dtValidade) {
+        this.dtValidade = dtValidade;
     }
 
-    
+    public String getCodLote() {
+        return codLote;
+    }
+
+    public void setCodLote(String codLote) {
+        this.codLote = codLote;
+    }
+
+    public int getQuantRemove() {
+        return quantRemove;
+    }
+
+    public void setQuantRemove(int quantRemove) {
+        this.quantRemove = quantRemove;
+    }
 }

@@ -1,44 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
-import controller.DentistaDao;
-import java.awt.Color;
-import javax.swing.JOptionPane;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.sql.Connection;
+import javax.swing.JOptionPane;
 import model.Suprimentos;
 
-
-/**
- *
- * @author rober
- */
 public class SuprimentosDao extends ConectarDao {
     
-
     public SuprimentosDao() {
         super();
     }
 
-
     public void incluir(Suprimentos obj) {
-        sql = "INSERT INTO Suprimentos VALUES (null ,? , ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Suprimentos (nomeEquip, reutilizavel, dtCompra, codLote, dtValidade, quantidade) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setString(1, obj.getNomeEquip());
             ps.setBoolean(2, obj.isReutilizavel());
             ps.setString(3, obj.getDtCompra());
             ps.setString(4, obj.getCodLote());
             ps.setString(5, obj.getDtValidade());
-            ps.setString(6, obj.getQuantidade());
+            ps.setInt(6, Integer.parseInt(obj.getQuantidade())); // Convertendo a quantidade para int
             ps.execute();
             ps.close();
             JOptionPane.showMessageDialog(null, "Registro Incluído com Sucesso!");
@@ -48,68 +31,82 @@ public class SuprimentosDao extends ConectarDao {
     }
 
     public ResultSet buscartodos() {
-        sql = "SELECT * FROM SUPRIMENTOS ORDER BY nomeEquip ";
+        String sql = "SELECT * FROM Suprimentos ORDER BY nomeEquip";
         try {
-            ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             return ps.executeQuery();
         } catch (SQLException err) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Suprimento!"
-                    + err.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Suprimento!" + err.getMessage());
             return null;
         }
     }
 
     public ResultSet buscar(Suprimentos obj) {
-
-        sql = "SELECT * FROM SUPRIMENTOS WHERE nomeEquip = ?";
+        String sql = "SELECT * FROM Suprimentos WHERE nomeEquip = ?";
         try {
-            ps = con.prepareStatement(sql);
-
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, obj.getNomeEquip());
-            ResultSet resul = ps.executeQuery();
-           
-            return resul;
+            return ps.executeQuery();
         } catch (SQLException err) {
-            JOptionPane.showMessageDialog(null, "Erro ao Buscar Suprimento!"
-                    + err.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Suprimento!" + err.getMessage());
             return null;
         }
     }
 
     public void excluir(String nome) {
-
-        sql = "DELETE FROM SUPRIMENTOS WHERE nomeEquip = '" + nome + "'";
+        String sql = "DELETE FROM Suprimentos WHERE nomeEquip = ?";
         try {
-            ps = con.prepareStatement(sql);
-
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nome);
             ps.execute();
             ps.close();
-            JOptionPane.showMessageDialog(null, "Registro Excluido com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Registro Excluído com Sucesso!");
         } catch (SQLException err) {
-            JOptionPane.showMessageDialog(null, "Erro ao Excluir usuário!"
-                    + err.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir Suprimento!" + err.getMessage());
         }
     }
     
-     public void alterar(Suprimentos obj) {
-        sql = "UPDATE SUPRIMENTOS SET nomeEquip = ?, Reutilizavel = ?";
+    public void alterar(Suprimentos obj) {
+        String sql = "UPDATE Suprimentos SET nomeEquip = ?, reutilizavel = ?, dtCompra = ?, codLote = ?, dtValidade = ?, quantidade = ? WHERE idEquip = ?";
         try {
-            ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, obj.getNomeEquip());
             ps.setBoolean(2, obj.isReutilizavel());
             ps.setString(3, obj.getDtCompra());
             ps.setString(4, obj.getCodLote());
             ps.setString(5, obj.getDtValidade());
-            ps.setString(6, obj.getQuantidade());
-            ps.execute();
-            ps.execute();
+            ps.setInt(6, Integer.parseInt(obj.getQuantidade())); // Convertendo a quantidade para int
+            ps.setInt(7, obj.getIdEquip());
+            ps.executeUpdate();
             ps.close();
             JOptionPane.showMessageDialog(null, "Registro Alterado com Sucesso!");
         } catch (SQLException err) {
-            JOptionPane.showMessageDialog(null,
-                    "Erro ao Alterar usuário!" + err.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Alterar Suprimento!" + err.getMessage());
         }
     }
 
-   
+    public ResultSet buscarPorCodigo(Suprimentos sm) {
+        String sql = "SELECT * FROM Suprimentos WHERE codLote = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, sm.getCodigo());
+            return ps.executeQuery();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar Suprimento!" + e.getMessage());
+            return null;
+        }
+    }
+
+    public void removerQuantidade(String codigo, int quantidadeRemover) {
+        String sql = "UPDATE Suprimentos SET quantidade = quantidade - ? WHERE codLote = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, quantidadeRemover);
+            ps.setString(2, codigo);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Remover Quantidade!" + e.getMessage());
+        }
+    }
 }

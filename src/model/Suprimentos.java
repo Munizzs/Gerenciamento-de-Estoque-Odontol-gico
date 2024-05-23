@@ -1,6 +1,4 @@
-
 package model;
-
 
 public class Suprimentos {
     private int idEquip;
@@ -11,7 +9,6 @@ public class Suprimentos {
     private String quantidade;
     private boolean reutilizavel;
     
-
     public String getDtValidade() {
         return dtValidade;
     }
@@ -43,7 +40,6 @@ public class Suprimentos {
     public void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
     }
-    
 
     public int getIdEquip() {
         return idEquip;
@@ -69,8 +65,12 @@ public class Suprimentos {
         this.reutilizavel = reutilizavel;
     }
     
+    // estoque
+    public String getCodigo() {
+        return codLote;
+    }
 
-    
-    
-    
+    public void setCodigo(String codigo) {
+        this.codLote = codigo;
+    }
 }

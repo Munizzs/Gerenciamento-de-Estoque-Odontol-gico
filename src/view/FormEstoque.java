@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Suprimentos;
 
 /**
  *
@@ -24,23 +25,26 @@ public class FormEstoque extends javax.swing.JFrame {
         initComponents();
     }
 
-    private void carregar_Estoque() {
-        String removeString = txtQtdRem.getText();
-        int remove = Integer.parseInt(removeString);
-        
+    private void carregar_suprimentos() {
         SuprimentosDao sd = new SuprimentosDao();
         EstoqueDao ed = new EstoqueDao();
-        
 
         while (tableEst.getModel().getRowCount() > 0) {
             ((DefaultTableModel) tableEst.getModel()).removeRow(0);
         }
         try {
-            ResultSet todos = ed.buscartodos();
-            
+            ResultSet todos = sd.buscartodos();
+
             DefaultTableModel tab = (DefaultTableModel) this.tableEst.getModel();
             while (todos.next()) {
-                Object[] linha = { todos.getString("codLote"), todos.getString("nomeEquip"),todos.getString("quantidade"),todos.getString("dtValidade"), todos.getBoolean("Reutilizavel"),remove};
+                Object[] linha = {
+                    todos.getString("codLote"),
+                    todos.getString("nomeEquip"),
+                    todos.getString("quantidade"),
+                    todos.getString("dtValidade"),
+                    todos.getBoolean("Reutilizavel"),
+                    0 // Inicialmente, a quantidade removida é zero
+                };
                 tab.addRow(linha);
             }
             todos.close();
@@ -48,7 +52,7 @@ public class FormEstoque extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, err.getMessage());
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -57,14 +61,14 @@ public class FormEstoque extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableEst = new javax.swing.JTable();
         txtNome = new javax.swing.JTextField();
-        txtQtdRem = new javax.swing.JTextField();
+        txtRemove = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnRemove = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtLote = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -86,7 +90,7 @@ public class FormEstoque extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cod lote", "Nome do Equipamento", "Quantidade disponivel", "Validade", "Reutilizavel", "Quantidade removida"
+                "Código", "Nome", "Disponivel", "Validade", "Reutilizavel", "Removido"
             }
         ) {
             Class[] types = new Class [] {
@@ -106,9 +110,9 @@ public class FormEstoque extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableEst);
 
-        txtQtdRem.addActionListener(new java.awt.event.ActionListener() {
+        txtRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQtdRemActionPerformed(evt);
+                txtRemoveActionPerformed(evt);
             }
         });
 
@@ -116,9 +120,19 @@ public class FormEstoque extends javax.swing.JFrame {
 
         jLabel3.setText("Quantidade");
 
-        jButton2.setText("Remover");
+        btnRemove.setText("Remover");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Buscar");
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Voltar ao menu");
         btnSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,17 +155,17 @@ public class FormEstoque extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addComponent(btnRemove)
                     .addComponent(jLabel4)
-                    .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar)
                     .addComponent(btnSair))
                 .addGap(139, 139, 139)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(txtQtdRem, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(182, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -166,14 +180,14 @@ public class FormEstoque extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
-                        .addComponent(jButton3)
+                        .addComponent(btnBuscar)
                         .addGap(35, 35, 35)
-                        .addComponent(jButton2)
+                        .addComponent(btnRemove)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(btnSair)
                         .addGap(18, 18, 18))
@@ -181,7 +195,7 @@ public class FormEstoque extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtQtdRem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRemove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -202,17 +216,17 @@ public class FormEstoque extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtQtdRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdRemActionPerformed
+    private void txtRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRemoveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtQtdRemActionPerformed
+    }//GEN-LAST:event_txtRemoveActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
+
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-TelaPrincipal tp = new TelaPrincipal();
-        tp.setVisible(true);        
+        TelaPrincipal tp = new TelaPrincipal();
+        tp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
 
@@ -227,8 +241,37 @@ TelaPrincipal tp = new TelaPrincipal();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       this.carregar_Estoque();
+        this.carregar_suprimentos();
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String codigo = txtCodigo.getText();
+    SuprimentosDao sd = new SuprimentosDao();
+    Suprimentos sm = new Suprimentos();
+    sm.setCodLote(codigo);
+
+    try {
+        ResultSet resul = sd.buscarPorCodigo(sm);
+        if (resul.next()) {
+            txtNome.setText(resul.getString("nomeEquip"));
+            // Adicione aqui os campos adicionais que deseja exibir
+        } else {
+            JOptionPane.showMessageDialog(null, "Produto não encontrado!");
+        }
+    } catch (SQLException err) {
+        JOptionPane.showMessageDialog(null, err.getMessage());
+    }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        String codigo = txtCodigo.getText();
+    int quantidadeRemover = Integer.parseInt(txtRemove.getText());
+    SuprimentosDao sd = new SuprimentosDao();
+
+    sd.removerQuantidade(codigo, quantidadeRemover);
+    JOptionPane.showMessageDialog(null, "Quantidade removida com sucesso!");
+    carregar_suprimentos(); // Atualizar a tabela após a remoção
+    }//GEN-LAST:event_btnRemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,17 +309,17 @@ TelaPrincipal tp = new TelaPrincipal();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableEst;
-    private javax.swing.JTextField txtLote;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtQtdRem;
+    private javax.swing.JTextField txtRemove;
     // End of variables declaration//GEN-END:variables
 }
